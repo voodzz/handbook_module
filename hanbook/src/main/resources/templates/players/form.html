@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить игрока</title>
+    <style>
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; }
+        input, select, textarea { width: 300px; padding: 5px; }
+    </style>
+</head>
+<body>
+
+<h1>Редактирование игрока</h1>
+
+<form th:action="@{/players/save}" th:object="${player}" method="post">
+
+    <input type="hidden" th:field="*{id}" />
+
+    <div class="form-group">
+        <label>Имя:</label>
+        <input type="text" th:field="*{firstName}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Фамилия:</label>
+        <input type="text" th:field="*{lastName}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Дата рождения:</label>
+        <input type="date" th:field="*{birthDate}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Клуб (Выпадающий список с ID):</label>
+        <select th:field="*{club}">
+            <option value="">-- Выберите клуб --</option>
+            <option th:each="c : ${clubs}"
+                    th:value="${c.id}"
+                    th:text="${c.name}"></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Рост (м):</label>
+        <input type="number" step="0.01" th:field="*{height}" />
+    </div>
+
+    <div class="form-group">
+        <label>Рыночная стоимость (€):</label>
+        <input type="number" th:field="*{marketValue}" />
+    </div>
+
+    <div class="form-group">
+        <label>Заметки (Многострочное поле):</label>
+        <textarea th:field="*{notes}" rows="4"></textarea>
+    </div>
+
+    <button type="submit" style="padding: 10px 20px;">Сохранить</button>
+    <a href="/players">Отмена</a>
+</form>
+
+</body>
+</html>

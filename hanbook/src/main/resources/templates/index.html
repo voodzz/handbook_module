@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная - Справочники</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+        .menu-item { display: inline-block; width: 200px; padding: 20px; margin: 10px;
+            background: #f0f0f0; border: 1px solid #ccc; text-decoration: none; color: black; }
+        .menu-item:hover { background: #e0e0e0; }
+    </style>
+</head>
+<body>
+<h2 th:text="${studentInfo}">ФИО студента</h2>
+<h1>Выберите справочник:</h1>
+<a href="/clubs" class="menu-item">🛡️ Футбольные клубы</a>
+<a href="/players" class="menu-item">🏃 Футболисты</a>
+</body>
+</html>
