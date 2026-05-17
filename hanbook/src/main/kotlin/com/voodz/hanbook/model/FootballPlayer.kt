@@ -21,10 +21,10 @@ class FootballPlayer(
     var id: Long? = null,
 
     @Column(name = "first_name", nullable = false)
-    var firstName: String,
+    var firstName: String = "",
 
     @Column(name = "last_name", nullable = false)
-    var lastName: String,
+    var lastName: String = "",
 
     @Column(name = "birth_date")
     var birthDate: LocalDate? = null,
@@ -37,5 +37,8 @@ class FootballPlayer(
     var height: BigDecimal? = null,
 
     @Column(name = "market_value")
-    var marketValue: Long? = null
+    var marketValue: Long? = null,
+
+    @Column
+    var notes: String? = null
 )

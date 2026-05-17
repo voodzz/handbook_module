@@ -1,5 +1,9 @@
+--liquibase formatted sql
+
+--changeset voodz:1
 CREATE SCHEMA IF NOT EXISTS football;
 
+--changeset voodz:2
 CREATE TABLE IF NOT EXISTS football.football_clubs
 (
     club_id       BIGSERIAL PRIMARY KEY,
@@ -9,6 +13,7 @@ CREATE TABLE IF NOT EXISTS football.football_clubs
     uefa_rating   NUMERIC(8, 3)
 );
 
+--changeset voodz:3
 CREATE TABLE IF NOT EXISTS football.football_players
 (
     player_id    BIGSERIAL PRIMARY KEY,

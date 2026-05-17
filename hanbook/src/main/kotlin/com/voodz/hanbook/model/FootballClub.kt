@@ -18,7 +18,7 @@ class FootballClub (
     var id: Long? = null,
 
     @Column(name = "club_name", unique = true, nullable = false)
-    var name: String,
+    var name: String = "",
 
     @Column(name = "creation_date")
     var creationDate: LocalDate? = null,
