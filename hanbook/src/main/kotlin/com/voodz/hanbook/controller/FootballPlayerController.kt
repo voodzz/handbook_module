@@ -24,8 +24,7 @@ class FootballPlayerController(
         @RequestParam(defaultValue = "lastName") sortBy: String,
         model: Model,
     ): String {
-       val sort = Sort.by(sortBy)
-       model.addAttribute("players", playerRepository.findAll(sort))
+        model.addAttribute("players", playerRepository.findAll(Sort.by(sortBy)))
         model.addAttribute("studentInfo", "Войтукевич Р.Ю., 3 курс, 2 группа, 2026")
         return "players/list"
     }

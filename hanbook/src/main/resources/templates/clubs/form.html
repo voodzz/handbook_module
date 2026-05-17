@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование клуба</title>
+    <style>
+        body { font-family: sans-serif; padding: 40px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 350px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .btn-save { background: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        .btn-back { color: #666; text-decoration: none; margin-left: 15px; }
+    </style>
+</head>
+<body>
+
+<h1 th:text="${club.id == null ? 'Добавить клуб' : 'Редактировать клуб'}">Форма</h1>
+
+<form th:action="@{/clubs/save}" th:object="${club}" method="post">
+
+    <input type="hidden" th:field="*{id}" />
+
+    <div class="form-group">
+        <label>Название клуба:</label>
+        <input type="text" th:field="*{name}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Дата основания:</label>
+        <input type="date" th:field="*{creationDate}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Домашний стадион:</label>
+        <input type="text" th:field="*{stadiumName}" />
+    </div>
+
+    <div class="form-group">
+        <label>Рейтинг UEFA (число с плавающей точкой):</label>
+        <input type="number" step="0.001" th:field="*{uefaRating}" placeholder="Например: 123.456" />
+    </div>
+
+    <div style="margin-top: 25px;">
+        <button type="submit" class="btn-save">💾 Сохранить</button>
+        <a href="/clubs" class="btn-back">Отмена</a>
+    </div>
+</form>
+
+</body>
+</html>
