@@ -45,6 +45,9 @@
             <a th:href="@{/players/delete/{id}(id=${p.id})}"
                onclick="return confirm('Удалить игрока?')"
                style="color: red;">Удалить</a>
+
+            <a th:href="@{/players/edit/{id}(id=${p.id})}"
+               style="color: blue; margin-right: 15px; text-decoration: none;">Редактировать</a>
         </td>
     </tr>
     </tbody>

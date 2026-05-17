@@ -48,4 +48,12 @@ class FootballPlayerController(
         playerRepository.deleteById(id)
         return "redirect:/players"
     }
+
+    @GetMapping("/edit/{id}")
+    fun showEditForm(@PathVariable id: Long, model: Model): String {
+        val player = playerRepository.findById(id).orElseThrow { IllegalArgumentException("Invalid player Id:$id") }
+        model.addAttribute("player", player)
+        model.addAttribute("clubs", clubRepository.findAll())
+        return "players/form"
+    }
 }

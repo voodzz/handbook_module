@@ -30,7 +30,7 @@ class FootballClubController(private val clubRepository: FootballClubRepository)
 
     @GetMapping("/edit/{id}")
     fun showEditForm(@PathVariable id: Long, model: Model): String {
-        val club = clubRepository.findById(id).orElseThrow()
+        val club = clubRepository.findById(id).orElseThrow { IllegalArgumentException("Invalid club Id:$id") }
         model.addAttribute("club", club)
         return "clubs/form"
     }
