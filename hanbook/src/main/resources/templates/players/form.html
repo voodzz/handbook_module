@@ -2,16 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Добавить игрока</title>
+    <title>Редактирование игрока</title>
     <style>
+        body { font-family: sans-serif; padding: 40px; }
         .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; }
-        input, select, textarea { width: 300px; padding: 5px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select, textarea { width: 350px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn-save { background: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px; }
+        .btn-back { color: #666; text-decoration: none; margin-left: 15px; }
+        textarea { resize: vertical; min-height: 80px; }
     </style>
 </head>
 <body>
 
-<h1>Редактирование игрока</h1>
+<h1 th:text="${player.id == null ? 'Добавить футболиста' : 'Редактировать футболиста'}">Форма</h1>
 
 <form th:action="@{/players/save}" th:object="${player}" method="post">
 
@@ -29,13 +33,17 @@
 
     <div class="form-group">
         <label>Дата рождения:</label>
-        <input type="date" th:field="*{birthDate}" required />
+        <input type="date"
+               id="birthDate"
+               name="birthDate"
+               th:value="${player.birthDate != null ? #temporals.format(player.birthDate, 'yyyy-MM-dd') : ''}"
+               required />
     </div>
 
     <div class="form-group">
-        <label>Клуб (Выпадающий список с ID):</label>
+        <label>Клуб:</label>
         <select th:field="*{club}">
-            <option value="">-- Выберите клуб --</option>
+            <option value="">-- Выберите клуб (Свободный агент) --</option>
             <option th:each="c : ${clubs}"
                     th:value="${c.id}"
                     th:text="${c.name}"></option>
@@ -53,12 +61,14 @@
     </div>
 
     <div class="form-group">
-        <label>Заметки (Многострочное поле):</label>
-        <textarea th:field="*{notes}" rows="4"></textarea>
+        <label>Заметки (многострочное поле):</label>
+        <textarea th:field="*{notes}"></textarea>
     </div>
 
-    <button type="submit" style="padding: 10px 20px;">Сохранить</button>
-    <a href="/players">Отмена</a>
+    <div style="margin-top: 25px;">
+        <button type="submit" class="btn-save">💾 Сохранить</button>
+        <a href="/players" class="btn-back">Отмена</a>
+    </div>
 </form>
 
 </body>

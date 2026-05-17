@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <title>Список футболистов</title>
     <style>
+        body { font-family: sans-serif; padding: 20px; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f4f4f4; }
-        .student-info { background: #e7f3ff; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
-        .btn { padding: 5px 10px; text-decoration: none; border: 1px solid #000; color: #000; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f8f9fa; }
+        .student-header { background: #e7f3ff; padding: 10px; border: 1px solid #b8daff; margin-bottom: 20px; }
+        .btn-add { background: #28a745; color: white; padding: 10px; text-decoration: none; border-radius: 4px; }
+        .notes-cell { font-style: italic; color: #666; font-size: 0.9em; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     </style>
 </head>
 <body>
 
-<div class="student-info">
-    <h2 th:text="${studentInfo}">Инфо о студенте</h2>
+<div class="student-header">
+    <h3 th:text="${studentInfo}">Данные студента</h3>
 </div>
 
 <h1>Справочник: Футболисты</h1>
 
-<a href="/players/add" class="btn" style="background: #d4edda;">+ Добавить игрока</a>
+<div style="margin-bottom: 20px;">
+    <a href="/" style="text-decoration: none;">🏠 На главную</a> |
+    <a href="/players/add" class="btn-add">+ Добавить игрока</a>
+</div>
 
 <table>
     <thead>
@@ -28,8 +33,9 @@
         <th><a th:href="@{/players(sortBy='lastName')}">Фамилия</a></th>
         <th><a th:href="@{/players(sortBy='birthDate')}">Дата рождения</a></th>
         <th><a th:href="@{/players(sortBy='club')}">Клуб</a></th>
-        <th><a th:href="@{/players(sortBy='height')}">Рост (м)</a></th>
-        <th><a th:href="@{/players(sortBy='marketValue')}">Цена (€)</a></th>
+        <th><a th:href="@{/players(sortBy='height')}">Рост</a></th>
+        <th><a th:href="@{/players(sortBy='marketValue')}">Стоимость</a></th>
+        <th>Заметки</th>
         <th>Действия</th>
     </tr>
     </thead>
@@ -39,15 +45,14 @@
         <td th:text="${p.lastName}"></td>
         <td th:text="${#temporals.format(p.birthDate, 'dd.MM.yyyy')}"></td>
         <td th:text="${p.club?.name ?: 'Свободный агент'}"></td>
-        <td th:text="${p.height}"></td>
-        <td th:text="${#numbers.formatDecimal(p.marketValue, 0, 'WHITESPACE', 0, 'POINT')}"></td>
+        <td th:text="${p.height + ' м'}"></td>
+        <td th:text="${p.marketValue + ' €'}"></td>
+        <td class="notes-cell" th:text="${p.notes}" th:title="${p.notes}"></td>
         <td>
+            <a th:href="@{/players/edit/{id}(id=${p.id})}" style="color: blue; text-decoration: none;">📝</a>
             <a th:href="@{/players/delete/{id}(id=${p.id})}"
-               onclick="return confirm('Удалить игрока?')"
-               style="color: red;">Удалить</a>
-
-            <a th:href="@{/players/edit/{id}(id=${p.id})}"
-               style="color: blue; margin-right: 15px; text-decoration: none;">Редактировать</a>
+               style="color: red; text-decoration: none; margin-left: 10px;"
+               onclick="return confirm('Удалить игрока?')">🗑️</a>
         </td>
     </tr>
     </tbody>

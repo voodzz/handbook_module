@@ -27,7 +27,11 @@
 
     <div class="form-group">
         <label>Дата основания:</label>
-        <input type="date" th:field="*{creationDate}" required />
+        <input type="date"
+               id="creationDate"
+               name="creationDate"
+               th:value="${club.creationDate != null ? #temporals.format(club.creationDate, 'yyyy-MM-dd') : ''}"
+               required />
     </div>
 
     <div class="form-group">
