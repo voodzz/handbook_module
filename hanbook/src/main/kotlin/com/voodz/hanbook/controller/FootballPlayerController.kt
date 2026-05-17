@@ -42,7 +42,6 @@ class FootballPlayerController(
         return "redirect:/players"
     }
 
-    // 4. Удаление
     @GetMapping("/delete/{id}")
     fun deletePlayer(@PathVariable id: Long): String {
         playerRepository.deleteById(id)
